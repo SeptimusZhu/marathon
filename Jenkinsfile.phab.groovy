@@ -49,11 +49,12 @@ ansiColor('gnome-terminal') {
     stage("Checkout D$REVISION_ID($DIFF_ID)") {
       checkout_marathon_master()
       m = load('marathon.groovy')
-      clean_git()
-      phabricator_apply_diff("$PHID", "$BUILD_URL", "$REVISION_ID", "$DIFF_ID")
+      m.clean_git()
+      m.phabricator_apply_diff("$PHID", "$BUILD_URL", "$REVISION_ID", "$DIFF_ID")
+      // load it again in case it changed.
+      m = load('marathon.groovy')
     }
 
-    m = load('marathon.groovy')
     if (m == null) {
       error "Jenkins doesn't know how to load stuff."
     }
