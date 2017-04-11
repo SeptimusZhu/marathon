@@ -48,6 +48,7 @@ ansiColor('gnome-terminal') {
     }
     stage("Checkout D$REVISION_ID($DIFF_ID)") {
       checkout_marathon_master()
+      m = load('marathon.groovy')
       clean_git()
       phabricator_apply_diff("$PHID", "$BUILD_URL", "$REVISION_ID", "$DIFF_ID")
     }
