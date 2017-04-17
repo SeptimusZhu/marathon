@@ -182,6 +182,7 @@ def assembly() {
 
 def package_binaries() {
   sh("sudo sbt packageAll")
+  return this
 }
 
 def is_phabricator_build() {
@@ -232,6 +233,7 @@ def publish_artifacts() {
       sh """GIT_TAG=${gitTag} ssh -o SendEnv=GIT_TAG -o StrictHostKeyChecking=no pkgmaintainer@repo1.hw.ca1.mesosphere.com "bash -s -- < scripts/publish_packages.sh" """
     }
   }
+  return this
 }
 
 /**
